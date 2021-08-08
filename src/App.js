@@ -16,7 +16,7 @@ const App = () => {
 
     useEffect(()=>{
         axios
-            .get('https://group-project-jeff-dwayne.herokuapp.com/news');
+            .get('https://group-project-jeff-dwayne.herokuapp.com/news')
             .then((response)=>{
                 setNewArticleList(response.data);
             })
