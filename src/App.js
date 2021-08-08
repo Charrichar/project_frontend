@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import './App.css';
 
 
 const App = () => {
@@ -107,6 +108,7 @@ const App = () => {
 
     return(
         <>
+          <div class='container'>
             <h1>Whenever O' Clock</h1>
 
             <form onSubmit={handleNewArticleSubmit}>
@@ -119,26 +121,27 @@ const App = () => {
                 <input type="submit" value="Create New Article"/>
             </form>
 
+
             <br/>
             <br/>
 
             <h2>Articles</h2>
 
 
-            <div class='container'>
+            <div class="article-container">
             {newArticleList.length > 0 ?
 
 
                         newArticleList.map((article) => {
                             return(
-                                    <div>
-                                      <h1>{article.title}</h1>
+                                    <div class="article">
+                                      <h1 class= "title">{article.title}</h1>
                                       <img src={article.image} alt=''/>
-                                      <h4>{article.author}</h4>
-                                      <h6>{article.publishedDate}</h6>
-                                      <p>{article.body}</p>
+                                      <h3 class= "author">{article.author}</h3>
+                                      <h6 class="date">{article.publishedDate}</h6>
+                                      <p class="body">{article.body}</p>
 
-                                        <button onClick={(event)=>{handleDelete(article)}}>delete
+                                        <button class="delete" onClick={(event)=>{handleDelete(article)}}>delete
                                         </button>
 
                                         <details>
@@ -152,7 +155,7 @@ const App = () => {
                                                 Author: <input type="text" onChange={handleNewAuthorChange}/><br/>
                                                 Body: <input type="text" onChange={handleNewBodyChange}/><br/>
                                                 Image: <input type='text' onChange={handleNewImageChange}/>
-                                                <input type="submit" value="Save Change"/>
+                                                <input class="button" type="submit" value="Save Change"/>
                                             </form>
                                         </details>
                                     </div>
@@ -161,6 +164,7 @@ const App = () => {
 
 
                 : <h1>false</h1>}
+                  </div>
                   </div>
 
         </>
