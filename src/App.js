@@ -19,7 +19,7 @@ const App = () => {
 
     useEffect(()=>{
         axios
-            .get('http://localhost:3003/news')
+            .get('https://group-project-jeff-dwayne.herokuapp.com/news')
             .then((response)=>{
                 setNewArticleList(response.data);
             })
@@ -56,7 +56,7 @@ const App = () => {
     const handleNewArticleSubmit = (event) =>{
         event.preventDefault();
         axios.post(
-            'http://localhost:3003/news',
+            'https://group-project-jeff-dwayne.herokuapp.com/news',
             {
                 title: newTitle,
                 author: newAuthor,
@@ -67,7 +67,7 @@ const App = () => {
             }
         ).then(()=>{
             axios
-                .get('http://localhost:3003/news')
+                .get('https://group-project-jeff-dwayne.herokuapp.com/news')
                 .then((response)=>{
                     setNewArticleList(response.data);
                 });
@@ -77,10 +77,10 @@ const App = () => {
     //---------- Delete ----------//
     const handleDelete = (article)=>{
         axios
-            .delete(`http://localhost:3003/news/${article._id}`)
+            .delete(`https://group-project-jeff-dwayne.herokuapp.com/news/${article._id}`)
             .then(()=>{
                 axios
-                    .get('http://localhost:3003/news')
+                    .get('https://group-project-jeff-dwayne.herokuapp.com/news')
                     .then((response)=>{
                         setNewArticleList(response.data)
                     })
@@ -92,7 +92,7 @@ const App = () => {
     const handleEdit = (article)=>{
         axios
             .put(
-                `http://localhost:3003/news/${article._id}`,
+                `https://group-project-jeff-dwayne.herokuapp.com/news/${article._id}`,
                 {
                     title: newTitle,
                     author: newAuthor,
@@ -102,7 +102,7 @@ const App = () => {
                 }
             ).then(()=>{
                 axios
-                    .get('http://localhost:3003/news')
+                    .get('https://group-project-jeff-dwayne.herokuapp.com/news')
                     .then((response)=>{
                         setNewArticleList(response.data)
                     })
