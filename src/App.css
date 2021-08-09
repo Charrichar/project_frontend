@@ -70,9 +70,28 @@ margin: 4px;
 .article {
   text-align: center;
   width: 32%;
-  border: 1px solid #001219;
+  border: 2em solid;
+  --angle: 0deg;
+  width: 50vmin;
+  height: 50vmin;
+  border: 10vmin solid;
+  border-image: linear-gradient(var(--angle), #021A0A, #013331, #2E3634, #5F706C, #B4D4CC) 1;
+    animation: 10s rotate linear infinite;
   margin: 5px;
 }
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
 
 .article img {
   width: 90%;
