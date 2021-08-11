@@ -1,11 +1,26 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick"
 
 
 const App = () => {
 
+
+  const settings = {
+    dots: true,
+    fade: true,
+    infinite: true,
+    speed: 500,
+    slideToShow: 1,
+    className: "slides",
+    autoplay: true,
+    speed: 2000,
+      autoplaySpeed: 2000,
+      cssEase: "linear
+  }
 
 
     //---------- State vars ----------//
@@ -112,21 +127,36 @@ const App = () => {
     return(
         <>
           <div class='container'>
-            <h1>Whenever O' Clock</h1>
+          <div class='page-top'>
+        <h1>Whenever O' Clock</h1>
 
-            <form onSubmit={handleNewArticleSubmit}>
-                New Title: <input type="text" onChange={handleNewTitleChange}/><br/>
-                New Category: <input type="text" onChange={handleNewCategoryChange}/><br/>
-                New Date: <input type="text" onChange={handleNewPublishedDateChange}/><br/>
-                New Author: <input type="text" onChange={handleNewAuthorChange}/><br/>
-                New Image: <input type="text" onChange={handleNewImageChange}/><br/>
-                New Body: <input type="text" onChange={handleNewBodyChange}/><br/>
-                <input type="submit" value="Create New Article"/>
-            </form>
+        <form onSubmit={handleNewArticleSubmit}>
+            New Title: <input type="text" onChange={handleNewTitleChange}/><br/>
+            New Category: <input type="text" onChange={handleNewCategoryChange}/><br/>
+            New Date: <input type="text" onChange={handleNewPublishedDateChange}/><br/>
+            New Author: <input type="text" onChange={handleNewAuthorChange}/><br/>
+            New Image: <input type="text" onChange={handleNewImageChange}/><br/>
+            New Body: <input type="text" onChange={handleNewBodyChange}/><br/>
+            <input type="submit" value="Create New Article"/>
+        </form>
+        <div class='App'>
+<Slider {...settings}>
+{newArticleList.map((image) => {
+return(
+  <div>
+  <img src ={image.image}/>
+  </div>
+)
+})}
+</Slider>
+</div>
+
+        </div>
 
 
-            <br/>
-            <br/>
+
+        <br/>
+        <br/>
 
             <h2>Articles</h2>
 

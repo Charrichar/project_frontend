@@ -74,7 +74,7 @@ margin: 4px;
   --angle: 0deg;
   width: 50vmin;
   height: 50vmin;
-  border: 10vmin solid;
+  border: 2vmin solid;
   border-image: linear-gradient(var(--angle), #021A0A, #013331, #2E3634, #5F706C, #B4D4CC) 1;
     animation: 10s rotate linear infinite;
   margin: 5px;
@@ -122,4 +122,18 @@ summary {
 
 summary:hover{
   cursor: pointer;
+}
+.App{
+  width: 70%;
+  border: 2em solid;
+  --angle: 0deg;
+  width: 70vmin;
+  height: 70vmin;
+  border: 2vmin solid;
+  border-image: linear-gradient(var(--angle), #021A0A, #013331, #2E3634, #5F706C, #B4D4CC) 1;
+    animation: 10s rotate linear infinite;
+  margin: 5px;
+}
+.page-top{
+  display:flex;
 }
