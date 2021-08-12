@@ -36,3 +36,5 @@ User Stories:
 Recommends using links and documentation for above Technologies
 
 Notes: Refer to above
+
+link to live project: https://group-project-front-end.herokuapp.com/
