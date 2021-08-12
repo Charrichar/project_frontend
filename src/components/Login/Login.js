@@ -20,7 +20,7 @@ const Login = (props) => {
   const handleNewUsernameSubmit = (event) =>{
       event.preventDefault();
       axios.post(
-          'http://localhost:3003/users/login',
+          'https://group-project-jeff-dwayne.herokuapp.com/users/login',
           {
               username: newUsername,
               password: newPassword,
