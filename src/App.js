@@ -1,10 +1,29 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import './App.css';import "slick-carousel/slick/slick.css";
+import './App.css';
+import Login from "./components/Login/Login.js";
+import Signup from "./components/Signup/Signup.js";
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick"
 
 const App = () => {
+
+  const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
+
+    const settings = {
+      dots: true,
+      fade: true,
+      infinite: true,
+      speed: 500,
+      slideToShow: 1,
+      className: "slides",
+      autoplay: true,
+      speed: 2000,
+        autoplaySpeed: 2000,
+        cssEase: "linear"
+    }
+
     //---------- State vars ----------//
     const [newTitle, setNewTitle] = useState('');
     const [newAuthor, setNewAuthor] = useState('')
