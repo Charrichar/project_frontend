@@ -1,29 +1,10 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import './App.css';
-import "slick-carousel/slick/slick.css";
+import './App.css';import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick"
 
-
 const App = () => {
-
-const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
-
-  const settings = {
-    dots: true,
-    fade: true,
-    infinite: true,
-    speed: 500,
-    slideToShow: 1,
-    className: "slides",
-    autoplay: true,
-    speed: 2000,
-      autoplaySpeed: 2000,
-      cssEase: "linear"
-  }
-
-
     //---------- State vars ----------//
     const [newTitle, setNewTitle] = useState('');
     const [newAuthor, setNewAuthor] = useState('')
@@ -33,9 +14,12 @@ const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
     const [newImage, setNewImage] = useState('')
     const [newArticleList, setNewArticleList] = useState([]);
 
+    const [authenticated, setAuthenticated] = useState(false);
+    const [token, setToken] = useState('');
+
     useEffect(()=>{
         axios
-            .get(address)
+            .get('http://localhost:3003/news')
             .then((response)=>{
                 setNewArticleList(response.data);
             })
@@ -72,7 +56,7 @@ const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
     const handleNewArticleSubmit = (event) =>{
         event.preventDefault();
         axios.post(
-            address,
+            'http://localhost:3003/news',
             {
                 title: newTitle,
                 author: newAuthor,
@@ -83,7 +67,7 @@ const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
             }
         ).then(()=>{
             axios
-                .get(address)
+                .get('http://localhost:3003/news')
                 .then((response)=>{
                     setNewArticleList(response.data);
                 });
@@ -93,10 +77,10 @@ const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
     //---------- Delete ----------//
     const handleDelete = (article)=>{
         axios
-            .delete(`${address}/${article._id}`)
+            .delete(`http://localhost:3003/news/${article._id}`)
             .then(()=>{
                 axios
-                    .get(address)
+                    .get('http://localhost:3003/news')
                     .then((response)=>{
                         setNewArticleList(response.data)
                     })
@@ -108,7 +92,7 @@ const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
     const handleEdit = (article)=>{
         axios
             .put(
-                `${address}/${article._id}`,
+                `http://localhost:3003/news/${article._id}`,
                 {
                     title: newTitle,
                     author: newAuthor,
@@ -118,7 +102,7 @@ const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
                 }
             ).then(()=>{
                 axios
-                    .get(address)
+                    .get('http://localhost:3003/news')
                     .then((response)=>{
                         setNewArticleList(response.data)
                     })
@@ -127,45 +111,48 @@ const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
 
     return(
         <>
+          {authenticated && <div>Logged in</div>}
           <div class='container'>
           <div class='page-top'>
-        <h1>Whenever O' Clock</h1>
+            <h1>Whenever O' Clock</h1>
+            {authenticated &&
+            <form onSubmit={handleNewArticleSubmit}>
+                New Title: <input type="text" onChange={handleNewTitleChange}/><br/>
+                New Category: <input type="text" onChange={handleNewCategoryChange}/><br/>
+                New Date: <input type="text" onChange={handleNewPublishedDateChange}/><br/>
+                New Author: <input type="text" onChange={handleNewAuthorChange}/><br/>
+                New Image: <input type="text" onChange={handleNewImageChange}/><br/>
+                New Body: <input type="text" onChange={handleNewBodyChange}/><br/>
+                <input type="submit" value="Create New Article"/>
+            </form>
+            }
+            <br/>
 
-        <form onSubmit={handleNewArticleSubmit}>
-            New Title: <input type="text" onChange={handleNewTitleChange}/><br/>
-            New Category: <input type="text" onChange={handleNewCategoryChange}/><br/>
-            New Date: <input type="text" onChange={handleNewPublishedDateChange}/><br/>
-            New Author: <input type="text" onChange={handleNewAuthorChange}/><br/>
-            New Image: <input type="text" onChange={handleNewImageChange}/><br/>
-            New Body: <input type="text" onChange={handleNewBodyChange}/><br/>
-            <input type="submit" value="Create New Article"/>
-        </form>
-        <div class='App'>
-<Slider {...settings}>
-{newArticleList.map((image) => {
-return(
-  <div>
-  <img src ={image.image}/>
-  </div>
-)
-})}
-</Slider>
-</div>
+            <div>
+              <Login setAuth={setAuthenticated} setToken={setToken}/>
+              <Signup setAuth={setAuthenticated} setToken={setToken}/>
+            </div>
+            <div class='App'>
+    <Slider {...settings}>
+    {newArticleList.map((image) => {
+    return(
+      <div>
+      <img src ={image.image}/>
+      </div>
+    )
+    })}
+    </Slider>
+    </div>
 
-        </div>
+            </div>
 
-
-
-        <br/>
-        <br/>
+            <br/>
 
             <h2>Articles</h2>
 
 
             <div class="article-container">
             {newArticleList.length > 0 ?
-
-
                         newArticleList.map((article) => {
                             return(
                                     <div class="article">
@@ -174,11 +161,11 @@ return(
                                       <h3 class= "author">{article.author}</h3>
                                       <h6 class="date">{article.publishedDate}</h6>
                                       <p class="body">{article.body}</p>
-
-                                        <button class="delete" onClick={(event)=>{handleDelete(article)}}>delete
-                                        </button>
-
-                                        <details>
+                                      {authenticated &&
+                                        <div>
+                                          <button class="delete" onClick={(event)=>{handleDelete(article)}}>delete
+                                          </button>
+                                          <details>
                                             <summary>
                                                 Edit Article
                                             </summary>
@@ -191,18 +178,17 @@ return(
                                                 Image: <input type='text' onChange={handleNewImageChange}/>
                                                 <input class="button" type="submit" value="Save Change"/>
                                             </form>
-                                        </details>
+                                          </details>
+                                        </div>
+                                      }
+
                                     </div>
                             )
                         })
-
-
                 : <h1>false</h1>}
                   </div>
-                  </div>
-
+            </div>
         </>
-
     );
 }
 
