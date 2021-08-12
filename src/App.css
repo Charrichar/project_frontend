@@ -146,5 +146,6 @@ input[type=text] {
   font-family: 'Raleway', sans-serif;
 }
 Slider img {
+  width: 100%;
   text-align: center;
 }
