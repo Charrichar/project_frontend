@@ -145,7 +145,12 @@ input[type=text] {
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
 }
+Slider {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
 Slider img {
   width: 100%;
-  text-align: center;
+
 }
