@@ -8,6 +8,7 @@ import Slider from "react-slick"
 
 const App = () => {
 
+const address = 'https://group-project-jeff-dwayne.herokuapp.com/news'
 
   const settings = {
     dots: true,
@@ -19,7 +20,7 @@ const App = () => {
     autoplay: true,
     speed: 2000,
       autoplaySpeed: 2000,
-      cssEase: "linear
+      cssEase: "linear"
   }
 
 
@@ -34,7 +35,7 @@ const App = () => {
 
     useEffect(()=>{
         axios
-            .get('http://localhost:3003/news')
+            .get(address)
             .then((response)=>{
                 setNewArticleList(response.data);
             })
@@ -71,7 +72,7 @@ const App = () => {
     const handleNewArticleSubmit = (event) =>{
         event.preventDefault();
         axios.post(
-            'http://localhost:3003/news',
+            address,
             {
                 title: newTitle,
                 author: newAuthor,
@@ -82,7 +83,7 @@ const App = () => {
             }
         ).then(()=>{
             axios
-                .get('http://localhost:3003/news')
+                .get(address)
                 .then((response)=>{
                     setNewArticleList(response.data);
                 });
@@ -92,10 +93,10 @@ const App = () => {
     //---------- Delete ----------//
     const handleDelete = (article)=>{
         axios
-            .delete(`http://localhost:3003/news/${article._id}`)
+            .delete(`${address}/${article._id}`)
             .then(()=>{
                 axios
-                    .get('http://localhost:3003/news')
+                    .get(address)
                     .then((response)=>{
                         setNewArticleList(response.data)
                     })
@@ -107,7 +108,7 @@ const App = () => {
     const handleEdit = (article)=>{
         axios
             .put(
-                `http://localhost:3003/news/${article._id}`,
+                `${address}/${article._id}`,
                 {
                     title: newTitle,
                     author: newAuthor,
@@ -117,7 +118,7 @@ const App = () => {
                 }
             ).then(()=>{
                 axios
-                    .get('http://localhost:3003/news')
+                    .get(address)
                     .then((response)=>{
                         setNewArticleList(response.data)
                     })
