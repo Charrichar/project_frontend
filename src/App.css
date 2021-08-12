@@ -40,6 +40,7 @@
 body{
 border: 4px solid #001219;
 margin: 4px;
+background-image: linear-gradient(#32F58F,#05170D);
 }
 
 .container {
@@ -68,6 +69,7 @@ margin: 4px;
 }
 
 .article {
+  background-color: white;
   text-align: center;
   width: 32%;
   border: 2em solid;
