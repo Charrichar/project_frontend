@@ -27,7 +27,7 @@ const Signup = (props) => {
   const handleNewUsernameSubmit = (event) =>{
       event.preventDefault();
       axios.post(
-          'http://localhost:3003/users/register',
+          'https://group-project-jeff-dwayne.herokuapp.com/users/register',
           {
               username: newUsername,
               password: newPassword,
