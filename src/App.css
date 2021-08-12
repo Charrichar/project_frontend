@@ -145,3 +145,6 @@ input[type=text] {
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
 }
+Slider img {
+  text-align: center;
+}
