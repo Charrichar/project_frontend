@@ -94,7 +94,7 @@ margin: 4px;
 
 
 .article img {
-  width: 90%;
+  width: 30%;
 }
 
 
@@ -136,4 +136,11 @@ summary:hover{
 }
 .page-top{
   display:flex;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
