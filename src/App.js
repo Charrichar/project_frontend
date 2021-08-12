@@ -99,7 +99,7 @@ const App = () => {
             .delete(`${address}/${article._id}`)
             .then(()=>{
                 axios
-                    .get('http://localhost:3003/news')
+                    .get(address)
                     .then((response)=>{
                         setNewArticleList(response.data)
                     })
