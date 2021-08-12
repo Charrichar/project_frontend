@@ -156,7 +156,7 @@ const App = () => {
     {newArticleList.map((image) => {
     return(
       <div>
-      <img src ={image.image}/>
+      <img class="s-image" src ={image.image}/>
       </div>
     )
     })}
