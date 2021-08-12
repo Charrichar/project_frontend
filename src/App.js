@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import './App.css';
-import Signup from './components/Signup/Signup.js';
-import Login from './components/Login/Login.js'
+import './App.css';import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick"
 
 const App = () => {
     //---------- State vars ----------//
@@ -113,6 +113,7 @@ const App = () => {
         <>
           {authenticated && <div>Logged in</div>}
           <div class='container'>
+          <div class='page-top'>
             <h1>Whenever O' Clock</h1>
             {authenticated &&
             <form onSubmit={handleNewArticleSubmit}>
@@ -130,6 +131,19 @@ const App = () => {
             <div>
               <Login setAuth={setAuthenticated} setToken={setToken}/>
               <Signup setAuth={setAuthenticated} setToken={setToken}/>
+            </div>
+            <div class='App'>
+    <Slider {...settings}>
+    {newArticleList.map((image) => {
+    return(
+      <div>
+      <img src ={image.image}/>
+      </div>
+    )
+    })}
+    </Slider>
+    </div>
+
             </div>
 
             <br/>
