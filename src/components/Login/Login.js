@@ -34,7 +34,7 @@ const Login = (props) => {
   };
 
 return (
-  <div class="login">
+  <div className="login">
     <form onSubmit={handleNewUsernameSubmit}>
       <span class="login-username">Username:</span>
       <input type="text" onChange={handleNewUsernameChange}/><br/>
