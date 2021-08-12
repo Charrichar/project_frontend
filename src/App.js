@@ -1,13 +1,10 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
-
-
+import Signup from './components/Signup/Signup.js';
+import Login from './components/Login/Login.js'
 
 const App = () => {
-
-
-
     //---------- State vars ----------//
     const [newTitle, setNewTitle] = useState('');
     const [newAuthor, setNewAuthor] = useState('')
@@ -16,6 +13,9 @@ const App = () => {
     const [newPublishedDate, setNewPublishedDate] = useState('')
     const [newImage, setNewImage] = useState('')
     const [newArticleList, setNewArticleList] = useState([]);
+
+    const [authenticated, setAuthenticated] = useState(false);
+    const [token, setToken] = useState('');
 
     useEffect(()=>{
         axios
@@ -111,9 +111,10 @@ const App = () => {
 
     return(
         <>
+          {authenticated && <div>Logged in</div>}
           <div class='container'>
             <h1>Whenever O' Clock</h1>
-
+            {authenticated &&
             <form onSubmit={handleNewArticleSubmit}>
                 New Title: <input type="text" onChange={handleNewTitleChange}/><br/>
                 New Category: <input type="text" onChange={handleNewCategoryChange}/><br/>
@@ -123,9 +124,14 @@ const App = () => {
                 New Body: <input type="text" onChange={handleNewBodyChange}/><br/>
                 <input type="submit" value="Create New Article"/>
             </form>
-
-
+            }
             <br/>
+
+            <div>
+              <Login setAuth={setAuthenticated} setToken={setToken}/>
+              <Signup setAuth={setAuthenticated} setToken={setToken}/>
+            </div>
+
             <br/>
 
             <h2>Articles</h2>
@@ -133,8 +139,6 @@ const App = () => {
 
             <div class="article-container">
             {newArticleList.length > 0 ?
-
-
                         newArticleList.map((article) => {
                             return(
                                     <div class="article">
@@ -143,11 +147,11 @@ const App = () => {
                                       <h3 class= "author">{article.author}</h3>
                                       <h6 class="date">{article.publishedDate}</h6>
                                       <p class="body">{article.body}</p>
-
-                                        <button class="delete" onClick={(event)=>{handleDelete(article)}}>delete
-                                        </button>
-
-                                        <details>
+                                      {authenticated &&
+                                        <div>
+                                          <button class="delete" onClick={(event)=>{handleDelete(article)}}>delete
+                                          </button>
+                                          <details>
                                             <summary>
                                                 Edit Article
                                             </summary>
@@ -160,18 +164,17 @@ const App = () => {
                                                 Image: <input type='text' onChange={handleNewImageChange}/>
                                                 <input class="button" type="submit" value="Save Change"/>
                                             </form>
-                                        </details>
+                                          </details>
+                                        </div>
+                                      }
+
                                     </div>
                             )
                         })
-
-
                 : <h1>false</h1>}
                   </div>
-                  </div>
-
+            </div>
         </>
-
     );
 }
 
